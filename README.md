@@ -1,2 +1,2 @@
 # Blog-BitMath
-Simple Math Operations Samples with Bits and Unlimited Integer Sample
+Simple Math Operation Samples with Bits and a Unlimited Integer Sample
