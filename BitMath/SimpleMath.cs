@@ -7,21 +7,26 @@ namespace BitMath
     public class SimpleMath
     {
         // Сложение
+        // Addition
         public static long Add(long summand, long addend)
         {
-            // Перенос.
+            // Перенос
             long carry = 0x00;
 
-            // Итерировать до тех пор, пока не закончится перенос на старший разряд.
+            // Итерировать до тех пор, пока не закончится перенос на старший разряд
+            // Iterate until the transfer to the highest level ends
             while (addend != 0x00)
             {
-                // Выставить флаг под разрядами с установленными битами.
+                // Выставить флаг под разрядами с установленными битами
+                // Set a flag under the bits with the bits set
                 carry = (summand & addend);
 
-                // Снять с первого слагаемого биты, разряд по которым уже учтен.
+                // Снять с первого слагаемого биты, разряд по которым уже учтен
+                // Remove from the first term the bits whose discharge has already been taken into account
                 summand = summand ^ addend;
 
-                // Перенос переводится в старший разряд.
+                // Перенос переводится в старший разряд
+                // The transfer is transferred to the senior category
                 addend = (carry << 1);
             }
 
@@ -77,19 +82,24 @@ namespace BitMath
         }
 
         // Хотя и входные данные long, их значения должны быть не больше int
+        // Although the input data is long, their values should not be greater than int
         public static long Divide(long dividend, long divisor)
         {
             // Инициализация результата
-            long ans = 0; 
+            // Initializing the result
+            long ans = 0;
 
             // Получаем знак результата
+            // We get the result sign
             bool isNegative = (dividend < 0) ^ (divisor < 0);
 
-            // Получаем модуль числа (абсолютное значение) для входных параметров (делимого и делителя).
+            // Получаем модуль числа (абсолютное значение) для входных параметров (делимого и делителя)
+            // We get the modulus of the number (absolute value) for the input parameters (divisible and divisor)
             dividend = dividend < 0 ? Add((~dividend), 1) : dividend;
             divisor = divisor < 0 ? Add((~divisor), 1) : divisor;
 
             // Осуществляем побитовое деление
+            // We carry out bitwise division
             for (int i = sizeof(int) * 8 - 1; i > -1; i--)
             {
                 if((divisor << i) <= dividend)
@@ -100,6 +110,7 @@ namespace BitMath
             }
 
             // Добавляем знак к результату
+            // Adding a sign to the result
             return isNegative ? -ans : ans;
         }
 
